@@ -229,7 +229,7 @@ def process_book(book_item, search_key, cursor):
         insert_query = f"INSERT INTO books ({columns}) VALUES ({placeholders})"
         cursor.execute(insert_query, tuple(book_data.values()))
 
-        # Process authors for junction table
+        # Processing authors
         for author_name in authors:
             if author_name:  # Make sure author name is not empty
                 author_id = insert_author(cursor, author_name)
@@ -239,7 +239,7 @@ def process_book(book_item, search_key, cursor):
                         VALUES (%s, %s)
                     """, (book_data["book_id"], author_id))
 
-        # Process categories for junction table
+        # Processing categories
         for category_name in categories:
             category_id = insert_category(cursor, category_name)
             if category_id:
@@ -248,7 +248,7 @@ def process_book(book_item, search_key, cursor):
                     VALUES (%s, %s)
                 """, (book_data["book_id"], category_id))
 
-        # Process industry identifiers
+        # Processing industry identifiers
         identifiers = volume_info.get("industryIdentifiers", [])
         for identifier in identifiers:
             cursor.execute("""
@@ -264,7 +264,7 @@ def process_book(book_item, search_key, cursor):
 
 
 def main():
-    api_key = 'AIzaSyA9RG-OEUzVU7Oom9nNLSIjj-FiJYFBwOk'
+    api_key = '*******************'
     search_keys = [
         "Python programming",
         "Data Science",
@@ -282,14 +282,14 @@ def main():
         connection = mysql.connector.connect(
             host='127.0.0.1',
             user='root',
-            password='123456789',
+            password='******',
             database='bookscape_explorer'
         )
 
         if connection.is_connected():
             cursor = connection.cursor()
 
-            # Create the database schema
+            # Creating the database schema
             create_database_schema(cursor)
 
             # Process each search key
