@@ -264,7 +264,7 @@ def process_book(book_item, search_key, cursor):
 
 
 def main():
-    api_key = 'The API key'
+    api_key = "Enter the API key"
     search_keys = [
         "Python programming",
         "Data Science",
