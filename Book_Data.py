@@ -289,6 +289,10 @@ def main():
         if connection.is_connected():
             cursor = connection.cursor()
 
+            # Create database if it doesn't exist
+            cursor.execute("CREATE DATABASE IF NOT EXISTS bookscape_explorer")
+            cursor.execute("USE bookscape_explorer")
+            
             # Creating the database schema
             create_database_schema(cursor)
 
